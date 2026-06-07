@@ -1,0 +1,19 @@
+{
+  "user_id": "jeki",
+  "kdf": {
+    "name": "scrypt",
+    "salt": "Qj0E_kx-sHuNPAQpIL62oQ",
+    "n": 16384,
+    "r": 8,
+    "p": 1,
+    "length": 16
+  },
+  "local_share": {
+    "nonce": "QRYx1W3yPfRmc_RF",
+    "blob": "NDKvq7Ajj9WdguScS4U7ExdOpDwaEqSrhw_HDJ6upT2aT4OOikHbar97W7SjliE3Tp6YICFWgzxEQvFpXM1QFqCToW-EWLg0Pd3D4SVknx5JW32-lYE2WZYaARb4ka-xhIjAjC5ob1sKcvRmQdqaYU6xJ4wP8KYsleJXNihZQk2AlfERGbSoWQc8SbTMZkuDDsvtjjbu0ePKe43CyuiTcy3ppMX1idCNDjaEYLFFQchCWBcPcYT2e0OauK2MBE7cKzT51Zmc08SAPdpd5bNW745mt88"
+  },
+  "backup_vault": {
+    "nonce": "afZAmenkS0OeW_iO",
+    "blob": "wN4m6rS7TrNIvuH9RAUUqnKDZsNYHSgCE6NcAcLGDhYTYcl8Ke4h4fqS"
+  }
+}
