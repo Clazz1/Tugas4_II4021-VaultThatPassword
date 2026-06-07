@@ -1,0 +1,22 @@
+[project]
+name = "vault-that-password"
+version = "1.0.0"
+description = "Vault That Password! - CLI password manager terdistribusi dengan Shamir Secret Sharing dan AES-128-GCM"
+requires-python = ">=3.11"
+dependencies = [
+    "qrcode[pil]>=7.4",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
