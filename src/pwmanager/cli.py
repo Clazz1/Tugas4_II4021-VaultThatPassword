@@ -1,5 +1,3 @@
-"""Command-line interface for the distributed password manager."""
-
 from __future__ import annotations
 
 import argparse
@@ -98,8 +96,37 @@ def cmd_inspect_local(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_visual_split(args: argparse.Namespace) -> int:
+    from .visual_crypto import create_visual_recovery_share
+
+    result = create_visual_recovery_share(
+        recovery_share_text=args.recovery_share,
+        out_dir=Path(args.out_dir),
+        prefix=args.prefix,
+        subpixel_size=args.subpixel_size,
+        qr_scale=args.qr_scale,
+    )
+    print(json.dumps(result.to_json(), indent=2, ensure_ascii=False))
+    return 0
+
+
+def cmd_visual_combine(args: argparse.Namespace) -> int:
+    from .visual_crypto import combine_visual_shares
+
+    output = combine_visual_shares(
+        share_1_path=Path(args.share_1),
+        share_2_path=Path(args.share_2),
+        overlay_path=Path(args.overlay_out),
+        combined_qr_path=Path(args.qr_out),
+        subpixel_size=args.subpixel_size,
+        qr_scale=args.qr_scale,
+    )
+    print(json.dumps(output, indent=2, ensure_ascii=False))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Password manager terdistribusi berbasis Shamir Secret Sharing.")
+    parser = argparse.ArgumentParser(description="Vault That Password! - password manager terdistribusi berbasis Shamir Secret Sharing.")
     parser.add_argument("--local-dir", default="client_data", help="direktori penyimpanan data lokal klien")
     parser.add_argument("--server-db", default="server_data/server.sqlite3", help="path SQLite server")
 
@@ -152,6 +179,23 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_local = sub.add_parser("inspect-local", help="lihat ringkasan data lokal klien")
     inspect_local.add_argument("--user", required=True)
     inspect_local.set_defaults(func=cmd_inspect_local)
+
+    visual_split = sub.add_parser("visual-split", help="ubah recovery share menjadi QR dan dua visual share")
+    visual_split.add_argument("--recovery-share", required=True, help="recovery share JSON atau token SSS1")
+    visual_split.add_argument("--out-dir", default="docs/visual_demo", help="direktori output gambar")
+    visual_split.add_argument("--prefix", default="recovery_share", help="prefix nama file output")
+    visual_split.add_argument("--subpixel-size", type=int, default=8, help="ukuran tiap subpixel visual share")
+    visual_split.add_argument("--qr-scale", type=int, default=10, help="skala QR bersih hasil render")
+    visual_split.set_defaults(func=cmd_visual_split)
+
+    visual_combine = sub.add_parser("visual-combine", help="gabungkan dua visual share menjadi overlay dan QR bersih")
+    visual_combine.add_argument("--share-1", required=True, help="path visual share pertama")
+    visual_combine.add_argument("--share-2", required=True, help="path visual share kedua")
+    visual_combine.add_argument("--overlay-out", default="docs/visual_demo/recovery_share_combined_overlay.png")
+    visual_combine.add_argument("--qr-out", default="docs/visual_demo/recovery_share_combined_qr.png")
+    visual_combine.add_argument("--subpixel-size", type=int, default=8)
+    visual_combine.add_argument("--qr-scale", type=int, default=10)
+    visual_combine.set_defaults(func=cmd_visual_combine)
 
     return parser
 
