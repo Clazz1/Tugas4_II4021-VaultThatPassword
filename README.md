@@ -9,7 +9,7 @@ Server hanya menyimpan ciphertext, nonce, metadata, dan satu server share. Prose
 | Nama | NIM | Kontak |
 | --- | --- | --- |
 | Muhammad Rafly Fauzan | 18223132 | 18223132@std.stei.itb.ac.id |
-| M. Rakha Rabbani K. A. | 18223130 | 18223130@std.stei.itb.ac.id |
+| M.  Rabbani K. A. | 18223130 | 18223130@std.stei.itb.ac.id |
 
 ## Fitur Utama
 
